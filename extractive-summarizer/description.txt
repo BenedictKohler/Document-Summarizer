@@ -1,0 +1,1 @@
+This is starting point for building an extractive summarizer to reduce the size of the text and then build new sentences.
