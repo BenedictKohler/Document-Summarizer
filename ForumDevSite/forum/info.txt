@@ -1,0 +1,30 @@
+How to update db for new posts:
+ () post model is stored in forum/models
+ () attributes must be updated in forum/models.py and templates/forum/home.html
+ () new databases must also be added in forum/admin to be accessed from admin gui
+ () db must also be passed to home route in forum/views.py 
+ ** make sure to make migrations and then migrate before restarting server
+
+ ** also added custom date formatting in home.html
+
+How to load and use an external function:
+1. create a function or class and put the .py file into the main app directory
+2. import that function or class into the app.views.py file
+3. call that function and its arguments in app.views.py
+4. pass the returned value into a html template in app/templates/filename.html
+5. create the html template and use the passed data dictionary
+6. update app/urls.py to accomodate the new view 
+
+Register User
+1. Created User app to handle user registration and login
+2. Set up urls so user will be able to access the pages
+3. Created a Register view to handle the logic of the registration - updated this view with a form that includes user email
+4. Created the html to display on the screen
+5. Installed crispy forms package in order to make the form appear more professioanl very easily
+
+Login
+1. Created in the User app that was created during the creation of the registration
+2. Set up urls to link to the login page
+3. View for the login page was created in the urls file, using an existing view 
+4. Created the html to display the login page 
+5. Used crispy forms to make it appear more professional
