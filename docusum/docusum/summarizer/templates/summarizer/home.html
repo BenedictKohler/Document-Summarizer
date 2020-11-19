@@ -1,0 +1,21 @@
+<head>
+	<meta charset="UTF-8">
+	<title>User Information Form</title>
+</head>
+<body>
+	<form action="" method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Submit</button>
+	</form>
+
+	<h2> Your summary is {{ your_name }}</h2>
+	
+	<hr>
+
+	<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<input type="file" name = "document">
+	<button type="submit">Upload File</button>
+	</form>
+</body>
