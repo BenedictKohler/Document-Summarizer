@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Summary
 
-# Register your models here.
+# Registration of Summary Table
+admin.site.register(Summary)

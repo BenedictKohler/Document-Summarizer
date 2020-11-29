@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 
+# Routes for the forum and home pages
 urlpatterns = [
     path('', PostListView.as_view(), name='forum-home'),
     path('post/<int:pk>/', PostDetailView.as_view(),name ='post-detail'),

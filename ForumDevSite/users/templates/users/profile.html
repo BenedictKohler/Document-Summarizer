@@ -1,5 +1,41 @@
 {% extends "forum/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <h1>Hi {{ user.username }}</h1>
+    <h3 style="color:grey;">Your active posts are:</h3>
+    {% for post in posts %}
+    	{% if post.author == user %}
+    	<article class="media content-section">
+		<div class="media-body">
+			<div class="article-metadata">
+				<a class="mr-2" href="#">{{ post.author }}</a>
+				<small class="text-muted">{{ post.date_posted|date:"D, F j, Y" }}</small>
+			</div>
+			<h3><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+			<p class="article-content">{{ post.content }}</p>
+		</div>
+	</article>
+	{% endif %}
+    {% endfor %}
+    
+    <h3 style="color:grey;">Your summaries are:</h3>
+
+    {% for summary in summaries %}
+    	{% if summary.author == user %}
+		<article class="media content-section">
+			<div class="media-body">
+				<div class="article-metadata">
+					<a class="mr-2" href="#">{{ summary.author }}</a>
+					<small class="text-muted">{{ summary.date_posted|date:"D, F j, Y" }}</small>
+				</div>
+				<h3>{{ summary.title }}</h3>
+				<p class="article-content">{{ summary.content }}</p>
+				<form method="POST">
+					{% csrf_token %}
+					<button class="btn btn-danger" type="submit" name="action" value={{ summary.id }}>Delete</button>
+				</form>
+			</div>
+		</article>
+	{% endif %}
+    {% endfor %}
 {% endblock content %}

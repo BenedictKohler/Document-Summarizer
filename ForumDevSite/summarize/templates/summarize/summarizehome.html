@@ -1,8 +1,65 @@
 {% extends "forum/base.html" %}
 {% block content %}
+
+<div class="form-group blue-border">
+	<form method="POST">
+		{% csrf_token %}
+		<textarea class="form-control mx-2" name="usertext" rows="6" placeholder="Paste your text here"></textarea>
+		<button class="btn btn-primary m-2 btn-block" type="submit" name="action" value="RawText">Summarize Text</button>
+	</form>
+</div>
+
 <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name = "document">
-    <button type="submit">Upload File</button>
+	{% csrf_token %}
+	<input class="form-control-file border m-2" type="file" name = "document">
+	<div class="mx-2">Supported File Types: .txt, .json</div>
+	<button type="submit" class="btn btn-primary m-2 btn-block" name = "action" value="File">Summarize Document</button>
 </form>
+
+<div class="form-group blue-border">
+	<form method="POST">
+	{% csrf_token %}
+	<textarea class="form-control mx-2" name="urltext" rows="1" placeholder="Enter URL here"></textarea>
+	<button class="btn btn-primary m-2 btn-block" type="submit" name="action" value="URL">Summarize Article</button>
+	</form>
+</div>
+
+{% if submitted == 1 %}
+	<h2 class="text-center" style="color:grey">Your summary is:</h2>
+	{% for sentence in summary %}
+		<p> {{ sentence }} </p>
+	{% endfor %}
+	{% if request.user.is_authenticated %}
+		<div class="text-center">
+			<form method="POST">
+				{% csrf_token %}
+				<textarea class="form-control mx-2" name="sumTitle" rows="1" placeholder="Enter a title for your summary"></textarea>
+				<button class="btn btn-success m-2" type="submit" name="action" value="save">Save</button>
+				<button class="btn btn-danger m-2" type="submit" name="action" value="discard">Discard</button>
+			</form>
+		</div>
+	{% else %}
+		<p><strong>Note: </strong>In order to access more features such as saving your summaries and creating posts you need to create a free account.</p>
+	{% endif %}
+{% elif submitted == 2 %}
+	<h2 class="text-center" style="color:grey">An error has occurred. Please try again!</h2>
+	<p class="text-center">Possible causes of the error are:</p>
+	<ul class="list-group m-2">
+		<li class="list-group-item">An invalid or restricted URL</li>
+		<li class="list-group-item">An unsupported document type</li>
+		<li class="list-group-item">Text that is less than 500 characters long</li>
+	</ul>
+{% elif submitted == 4 %}
+	<h2 class="text-center" style="color:red">Warning:</h2>
+	<p>You need to create an account in order to summarize text that is more than 20000 characters long!</p>
+{% elif submitted == 5 %}
+	<h3 class="text-center" style="color:lightgreen">Your summary has been successfully saved! It may be viewed in your profile section.</h3>
+{% elif submitted == 6 %}
+	<h3 class="text-center" style="color:red">Your summary has been discarded!</h3>
+{% else %}
+	<h2 class="text-center" style="color:grey">Your summary will appear below</h2>
+	<p class="text-center">Please be patient, as it may take between 2 to 5 minutes in order to generate.</p>
+{% endif %}
+
 {% endblock content %}
+

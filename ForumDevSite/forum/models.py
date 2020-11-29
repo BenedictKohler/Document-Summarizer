@@ -2,18 +2,15 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
-# Create your models here.
 
+# Creation of the Posts table for the forum
 class Post(models.Model):
+    # fields
     title = models.CharField(max_length=100) 
     content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now) #time set in local
-    author = models.ForeignKey(User,on_delete=models.CASCADE) #delete post if 
-                                                              #user is deleted
-    #python manage.py makemigrations
-    #python manage.py sqlmigrate forum ____ where ___ is migration id write out sql for database
-    #python manage.py migrate
-
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User,on_delete=models.CASCADE) # delete post if 
+                                                              # user is deleted
     def __str__(self):
         return self.title
 

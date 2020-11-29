@@ -5,12 +5,10 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .testClass import djangoMethodTest
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-# Create your views here.
+# These are the views for the home and forum pages
 
 def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
+    context = {'posts': Post.objects.all()}
     return render(request, 'forum/home.html', context)
 
 class PostListView(ListView):
@@ -60,3 +58,4 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
