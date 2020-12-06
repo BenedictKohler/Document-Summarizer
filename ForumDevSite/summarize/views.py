@@ -1,3 +1,7 @@
+# Collaborators: Daniel, Ben, Jon, Josh, Erin
+# Description: Handles all summary functionality apart from the actual summarization
+# Date: 12/6/2020
+
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from .computeSummary import compute

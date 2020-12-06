@@ -1,3 +1,8 @@
+<!--
+Collaborators: Daniel, Ben, Jon, Josh, Erin
+Description: HTML file used to display the content of our summary home page
+Date: 12/6/2020
+-->
 {% extends "forum/base.html" %}
 {% block content %}
 
@@ -24,12 +29,12 @@
 	</form>
 </div>
 
-{% if submitted == 1 %}
+{% if submitted == 1 %} <!--Summray is created and return sucessfully-->
 	<h2 class="text-center" style="color:grey">Your summary is:</h2>
 	{% for sentence in summary %}
 		<p> {{ sentence }} </p>
 	{% endfor %}
-	{% if request.user.is_authenticated %}
+	{% if request.user.is_authenticated %} <!--Checks if user is loggged in to save summary-->
 		<div class="text-center">
 			<form method="POST">
 				{% csrf_token %}
@@ -41,7 +46,7 @@
 	{% else %}
 		<p><strong>Note: </strong>In order to access more features such as saving your summaries and creating posts you need to create a free account.</p>
 	{% endif %}
-{% elif submitted == 2 %}
+{% elif submitted == 2 %}<!--Handles possible erros that may occur-->
 	<h2 class="text-center" style="color:grey">An error has occurred. Please try again!</h2>
 	<p class="text-center">Possible causes of the error are:</p>
 	<ul class="list-group m-2">
@@ -49,14 +54,14 @@
 		<li class="list-group-item">An unsupported document type</li>
 		<li class="list-group-item">Text that is less than 500 characters long</li>
 	</ul>
-{% elif submitted == 4 %}
+{% elif submitted == 4 %}<!--Prompts to create account if text too long-->
 	<h2 class="text-center" style="color:red">Warning:</h2>
 	<p>You need to create an account in order to summarize text that is more than 20000 characters long!</p>
-{% elif submitted == 5 %}
+{% elif submitted == 5 %}<!--Prompts that post was saved-->
 	<h3 class="text-center" style="color:lightgreen">Your summary has been successfully saved! It may be viewed in your profile section.</h3>
-{% elif submitted == 6 %}
+{% elif submitted == 6 %}<!--Promps that post was deleted-->
 	<h3 class="text-center" style="color:red">Your summary has been discarded!</h3>
-{% else %}
+{% else %}<!--More information about summarization process (Default Screen)-->
 	<h2 class="text-center" style="color:grey">Your summary will appear below</h2>
 	<p class="text-center">Please be patient, as it may take between 2 to 5 minutes in order to generate.</p>
 {% endif %}

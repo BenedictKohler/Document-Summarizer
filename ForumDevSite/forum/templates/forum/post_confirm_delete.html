@@ -1,8 +1,13 @@
+<!--
+Collaborators: Daniel, Ben, Jon, Josh, Erin
+Description: HTML file for to display when deleting a post
+Date: 12/6/2020
+-->
 {% extends "forum/base.html" %}
 {% block content %}
     <div class="content-section">
         <form method="POST">
-            {% csrf_token %}
+            {% csrf_token %} 
             <fieldset class ="form-group">
                 <legend class = "border-bottom mb-4">Delete Forum Post</legend>
                 <h2>Confirm you want to delete post "{{ object.title }}"</h2>

@@ -1,3 +1,7 @@
+# Collaborators: Daniel, Ben, Jon, Josh, Erin
+# Description: URLs file to route to pages
+# Date: 12/6/2020
+
 """ForumDevSite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,6 +22,7 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 
+#There are the base urls used to link to other apps urls files
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),

@@ -1,3 +1,7 @@
+# Collaborators: Daniel, Ben, Jon, Josh, Erin
+# Description: Creates the summary 
+# Date: 12/6/2020
+
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 import torch
 
@@ -7,23 +11,23 @@ def splitText(txt, s_len) : # This is needed in order to ensure the summarizer r
     These sections are then fed into the Pegasus Summarizer which provides
     summaries according to the sections length.
     """
-    if s_len <= 1000 :
+    if s_len <= 1000 : #text is the correct size, return the string to be summarized
         return [txt]
 
-    elif s_len <= 5000 :
+    elif s_len <= 5000 : #text is too large, needs to be broken up into portions
         sen_list = []
         ind = 1000
         b_ind = 0
-        while ind <= s_len :
-            sen_list.append(txt[b_ind:ind])
+        while ind <= s_len : #while text is still too large
+            sen_list.append(txt[b_ind:ind])  # breaks  up text into portions of 1,000 characters
             b_ind += 1000
             ind += 1000
         end = txt[b_ind : ]
-        if len(end) >= 500 :
+        if len(end) >= 500 : #if some text still remaining that is larger than 500 characters also summarize that text
             sen_list.append(end)
         return sen_list
 
-    elif s_len <= 10000 :
+    elif s_len <= 10000 : #same functionality as above but larger numbers
         sen_list = []
         ind = 2000
         b_ind = 0
@@ -36,7 +40,7 @@ def splitText(txt, s_len) : # This is needed in order to ensure the summarizer r
             sen_list.append(end)
         return sen_list
 
-    elif s_len <= 15000 :
+    elif s_len <= 15000 : #same functionality as above but larger numbers
         sen_list = []
         ind = 3000
         b_ind = 0
@@ -49,7 +53,7 @@ def splitText(txt, s_len) : # This is needed in order to ensure the summarizer r
             sen_list.append(end)
         return sen_list
 
-    elif s_len <= 20000 :
+    elif s_len <= 20000 : #same functionality as above but larger numbers
         sen_list = []
         ind = 4000
         b_ind = 0
@@ -62,7 +66,7 @@ def splitText(txt, s_len) : # This is needed in order to ensure the summarizer r
             sen_list.append(end)
         return sen_list
 
-    else :
+    else : #if larger than 20,000 then it breaks up the text into chracters/10 chunks to be summarized
         separation = int(s_len / 10)
         s_copy = separation
         sen_list = []
@@ -101,6 +105,3 @@ def compute(sm) :
         final_summary.append(tokenizer.batch_decode(t, skip_special_tokens=True)[0])
 
     return final_summary
-
-
-
