@@ -1,10 +1,15 @@
+<!--
+Collaborators: Daniel, Ben, Jon, Josh, Erin
+Description: HTML file used to display users indivudal profiles 
+Date: 12/6/2020
+-->
 {% extends "forum/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
     <h1>Hi {{ user.username }}</h1>
     <h3 style="color:grey;">Your active posts are:</h3>
     {% for post in posts %}
-    	{% if post.author == user %}
+    	{% if post.author == user %} <!--Loops through all posts users has and renders each one on the user profile-->
     	<article class="media content-section">
 		<div class="media-body">
 			<div class="article-metadata">
@@ -20,7 +25,7 @@
     
     <h3 style="color:grey;">Your summaries are:</h3>
 
-    {% for summary in summaries %}
+    {% for summary in summaries %} <!--Loops through all summaries users has and renders each one on the user profile-->
     	{% if summary.author == user %}
 		<article class="media content-section">
 			<div class="media-body">

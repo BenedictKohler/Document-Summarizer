@@ -1,3 +1,7 @@
+# Collaborators: Daniel, Ben, Jon, Josh, Erin
+# Description: Views file used to handle user registration and user profiles
+# Date: 12/6/2020
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
